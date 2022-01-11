@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <unistd.h>
 
 using namespace std;
 /*
@@ -41,14 +42,15 @@ string longestRepeatedSubstring(const char *buffer)
     // seek back to beginning
     //buffer->seekg(0, ios::beg);
     std::string str = buffer;
-    //string str;
-    //str = buffer;
+    //int n = strlen(buffer);
     int n = str.length();
-    cout << buffer;
-    int LCSRe[n+1][n+1];
+    // Declare 2D vector & set all to 0
+    vector<vector<int>> LCSRe(n+1, std::vector<int>(n+1, 0));
+
+    //int LCSRe[n+1][n+1];
 
     // Setting all to 0
-    memset(LCSRe, 0, sizeof(LCSRe));
+    //memset(LCSRe, 0, sizeof(LCSRe));
 
     string res; // To store result
     int res_length  = 0; // To store length of result
@@ -90,6 +92,23 @@ string longestRepeatedSubstring(const char *buffer)
     return res;
 }
 
+
+unsigned long long getTotalSystemMemory()
+{
+    long pages = sysconf(_SC_PHYS_PAGES);
+    long page_size = sysconf(_SC_PAGE_SIZE);
+    return pages * page_size;
+}
+
+unsigned long long getAvailableSystemMemory()
+{
+    long pages = sysconf(_SC_AVPHYS_PAGES);
+    long page_size = sysconf(_SC_PAGE_SIZE);
+    return pages * page_size;
+}
+
+
+
 // Driver program to test the above function
 int main()
 {
@@ -103,7 +122,27 @@ int main()
     char* buffer=new char[size];
     // get file data
     pbuf->sgetn (buffer,size);
-    cout << buffer;
-    //cout << longestRepeatedSubstring(buffer);
+    cout << "File size: " << size << endl;
+    cout << "Buffer size: " << strlen(buffer) << endl;
+    std::string str = buffer;
+    int n_c = strlen(buffer);
+    int n_cpp = str.length();
+    cout << "C str size: " << n_c << endl;
+    cout << "Cpp str size: " << n_cpp << endl;
+    unsigned long long totalMem = getTotalSystemMemory();
+    cout << "Total Memory: " << totalMem << endl;
+    unsigned long long freeMem = getAvailableSystemMemory();
+    cout << "Available Memory: " << freeMem << endl;
+    cout << "Sizeof vector<int>: " << sizeof(vector<int>) << endl;
+    cout << "Sizeof NxN vector<int>: " << n_cpp * n_cpp * sizeof(vector<int>) << endl;
+    // Handle OOM condition before we impact the system
+    if (n_cpp * n_cpp * sizeof(vector<int>) > freeMem) {
+        cout << "ERROR: Input string is too long to process with NxN matrix algorithm!" << endl;
+        cout << n_cpp << "x" << n_cpp << " vector<int> would require " << n_cpp * n_cpp * sizeof(vector<int>) << " bytes!" << endl;
+        exit(EXIT_FAILURE);
+    } else {
+        cout << "Finding longest repeated substring..." << endl;
+        cout << longestRepeatedSubstring(buffer) << endl;
+    }
     return 0;
 }
