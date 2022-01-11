@@ -32,17 +32,19 @@ _|     ` |      ',    .  ,   ,' \/ |  |-_
 
 // Returns the longest repeating non-overlapping
 // substring in file 'input.txt'
-string longestRepeatedSubstring(std::stringstream *buffer)
+string longestRepeatedSubstring(const char *buffer)
 {
     //buffer.str().c_str().length
     // find size of stringstream buffer
-    buffer->seekg(0, ios::end);
-    int n = buffer->tellg();
-    //int n = str.length();
+    //buffer->seekg(0, ios::end);
+    //int n = buffer->tellg();
     // seek back to beginning
-    buffer->seekg(0, ios::beg);
-    string str = buffer->str();
-    cout << str;
+    //buffer->seekg(0, ios::beg);
+    std::string str = buffer;
+    //string str;
+    //str = buffer;
+    int n = str.length();
+    cout << buffer;
     int LCSRe[n+1][n+1];
 
     // Setting all to 0
@@ -92,9 +94,16 @@ string longestRepeatedSubstring(std::stringstream *buffer)
 int main()
 {
     std::ifstream t("input.txt");
-    std::stringstream buf;
-    std::stringstream *buffer = &buf;
-    buf << t.rdbuf();
-    cout << longestRepeatedSubstring(buffer);
+    std::filebuf* pbuf = t.rdbuf();
+    // get file size using buffer's members
+    std::size_t size = pbuf->pubseekoff (0,t.end,t.in);
+    pbuf->pubseekpos (0,t.in);
+
+    // allocate memory to contain file data
+    char* buffer=new char[size];
+    // get file data
+    pbuf->sgetn (buffer,size);
+    cout << buffer;
+    //cout << longestRepeatedSubstring(buffer);
     return 0;
 }
