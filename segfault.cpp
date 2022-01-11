@@ -1,5 +1,6 @@
-// C++ program to segfault
-#include<bits/stdc++.h>
+// C++ program to segfault on linux
+#include <iostream>
+#include <stdlib.h>
 
 using namespace std;
 
