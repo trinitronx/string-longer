@@ -6,6 +6,29 @@
 #include <string>
 
 using namespace std;
+/*
+ .-.                     ,.,_,.
+ | |                  ,.''     \
+ | |                 '          '         So that's what things would be like if I'd
+ | |               /'           |         invented the fing-longer. [Sigh].
+ | |             /_-            |         A man can dream though. A man can dream...
+ | |           .'__      _-_    :           - Prof. Hubert J. Farnsworth
+ | |          /__        _-_    :
+ | |         ,_,._     ,_,._~   |___
+ | |       .'-_ '.'.-.'-_ '.'._-^_  '.
+ | |       |  -_ |.| |  -_ | | / |
+ | |        ',_,' /  _',_,'_'  /|/
+ | |         .  .|    ',. ._-^  |'
+ | |          ' '.   .'  '.    '/|
+ | |.,.,    ,'    '''    __'.  \/ -_
+ | | | |., '_=-..--..--'^  '', : \. '.
+_|     ` |      ',    .  ,   ,' \/ |  |-_
+\`\       ;     / ',.. '. '. ,../  |  |  '-_
+ \        |   ,'  . \'.:.''''    .''. '.    \.
+  \      /  ,'    | |\       ,../   |  |      ',
+   |    |   |    ,' ''.,.''''       ', ',       |
+   |    |   |    |                   |  |       '\
+*/
 
 // Returns the longest repeating non-overlapping
 // substring in file 'input.txt'
