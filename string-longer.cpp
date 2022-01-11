@@ -1,10 +1,14 @@
 // C++ program to find the longest repeated
 // non-overlapping substring
 #include<bits/stdc++.h>
+#include <fstream>
+#include <sstream>
+#include <string>
+
 using namespace std;
 
 // Returns the longest repeating non-overlapping
-// substring in str
+// substring in file 'input.txt'
 string longestRepeatedSubstring(string str)
 {
     int n = str.length();
@@ -56,7 +60,9 @@ string longestRepeatedSubstring(string str)
 // Driver program to test the above function
 int main()
 {
-    string str = "geeksforgeeks";
-    cout << longestRepeatedSubstring(str);
+    std::ifstream t("input.txt");
+    std::stringstream buffer;
+    buffer << t.rdbuf();
+    cout << longestRepeatedSubstring(buffer.str().c_str());
     return 0;
 }
