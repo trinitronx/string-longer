@@ -130,6 +130,8 @@ unsigned long long getTotalSystemMemory()
 unsigned long long getAvailableSystemMemory()
 {
 #ifdef __APPLE__
+    cout << "WARN: getAvailableSystemMemory() not implemented yet on macOS!" << endl;
+    cout << "WARN: This program will cowardly refuse to function" << endl;
     return 0; // Not implemented yet...
 #else
     return available_pages * system_page_size;
