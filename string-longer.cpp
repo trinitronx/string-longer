@@ -15,6 +15,31 @@
 #endif
 
 using namespace std;
+
+std::vector<std::string> picture =
+{
+    R"( .-.                     ,.,_,.)",
+    R"( | |                  ,.''     \)",
+    R"( | |                 '          '         So that's what things would be like if I'd)",
+    R"( | |               /'           |         invented the fing-longer. [Sigh].)",
+    R"( | |             /_-            |         A man can dream though. A man can dream...)",
+    R"( | |           .'__      _-_    :           - Prof. Hubert J. Farnsworth)",
+    R"( | |          /__        _-_    :)",
+    R"( | |         ,_,._     ,_,._~   |___)",
+    R"( | |       .'-_ '.'.-.'-_ '.'._-^_  '.)",
+    R"( | |       |  -_ |.| |  -_ | | / |)",
+    R"( | |        ',_,' /  _',_,'_'  /|/)",
+    R"( | |         .  .|    ',. ._-^  |')",
+    R"( | |          ' '.   .'  '.    '/|)",
+    R"( | |.,.,    ,'    '''    __'.  \/ -_)",
+    R"( | | | |., '_=-..--..--'^  '', : \. '.)",
+    R"(_|     ` |      ',    .  ,   ,' \/ |  |-_)",
+    R"(\`\       ;     / ',.. '. '. ,../  |  |  '-_)",
+    R"( \        |   ,'  . \'.:.''''    .''. '.    \.)",
+    R"(  \      /  ,'    | |\       ,../   |  |      ',)",
+    R"(   |    |   |    ,' ''.,.''''       ', ',       |)",
+    R"(   |    |   |    |                   |  |       '\)"
+} ;
 /*
  .-.                     ,.,_,.
  | |                  ,.''     \
@@ -38,6 +63,13 @@ _|     ` |      ',    .  ,   ,' \/ |  |-_
    |    |   |    ,' ''.,.''''       ', ',       |
    |    |   |    |                   |  |       '\
 */
+
+void outputPicture( const std::vector<std::string>& picture )
+{
+    std::cout << endl ;
+    for( const auto& line : picture ) std::cout << line << endl ;
+    std::cout << endl ;
+}
 
 // Returns the longest repeating non-overlapping
 // substring in file 'input.txt'
@@ -142,6 +174,7 @@ unsigned long long getAvailableSystemMemory()
 // Driver program to test the above function
 int main()
 {
+    outputPicture(picture);
     std::ifstream t("input.txt");
     std::filebuf* pbuf = t.rdbuf();
     // get file size using buffer's members
