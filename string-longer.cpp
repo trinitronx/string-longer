@@ -1,10 +1,18 @@
 // C++ program to find the longest repeated
 // non-overlapping substring
-#include<bits/stdc++.h>
+#include <iostream>
+#include <stdlib.h>
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <vector>
 #include <unistd.h>
+#include <cstring>
+
+#ifdef __APPLE__
+#include <mach/mach_host.h>
+#include <mach/mach_init.h>
+#endif
 
 using namespace std;
 /*
@@ -45,7 +53,7 @@ string longestRepeatedSubstring(const char *buffer)
     //int n = strlen(buffer);
     int n = str.length();
     // Declare 2D vector & set all to 0
-    vector<vector<int>> LCSRe(n+1, std::vector<int>(n+1, 0));
+    vector< vector<int> > LCSRe(n+1, std::vector<int>(n+1, 0));
 
     //int LCSRe[n+1][n+1];
 
@@ -92,21 +100,41 @@ string longestRepeatedSubstring(const char *buffer)
     return res;
 }
 
+#ifdef __APPLE__
+uint64_t mac_os_x_get_total_memory() {
+    struct host_basic_info hostinfo;
+    mach_msg_type_number_t host_basic_info_count = HOST_BASIC_INFO_COUNT;
+
+    int result = host_info(mach_host_self(), HOST_BASIC_INFO, (host_info_t)&hostinfo, &host_basic_info_count);
+    if (result != KERN_SUCCESS) {
+        return -1;
+    }
+    const uint64_t system_memory_bytes = hostinfo.max_mem;
+    return system_memory_bytes;
+}
+#else
+    const long system_memory_pages = sysconf(_SC_PHYS_PAGES);
+    const long system_page_size = sysconf(_SC_PAGE_SIZE);
+    const long available_pages = sysconf(_SC_AVPHYS_PAGES);
+#endif
 
 unsigned long long getTotalSystemMemory()
 {
-    long pages = sysconf(_SC_PHYS_PAGES);
-    long page_size = sysconf(_SC_PAGE_SIZE);
-    return pages * page_size;
+#ifdef __APPLE__
+    return mac_os_x_get_total_memory();
+#else
+    return system_memory_pages * system_page_size;
+#endif
 }
 
 unsigned long long getAvailableSystemMemory()
 {
-    long pages = sysconf(_SC_AVPHYS_PAGES);
-    long page_size = sysconf(_SC_PAGE_SIZE);
-    return pages * page_size;
+#ifdef __APPLE__
+    return 0; // Not implemented yet...
+#else
+    return available_pages * system_page_size;
+#endif
 }
-
 
 
 // Driver program to test the above function
