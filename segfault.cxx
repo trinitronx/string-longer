@@ -6,7 +6,7 @@
 using namespace std;
 
 template<class T>
-void printVector(std::vector<std::vector<T>> const &matrix) {
+void printVector(std::vector< std::vector<T> > const &matrix) {
     for (std::vector<T> row: matrix)
     {
         for (T val: row) {
@@ -29,9 +29,9 @@ int main()
       // segfault on my machine at 1448x1448 = 8386816 bytes
       //int Matrix2D[n][n];
       //Matrix2D[n-1][n-1] = 1; // try to trigger segfault
-      //vector<vector<int>> v;
+      //vector< vector<int> > v;
       //v.reserve(n*n*sizeof(int));
-      vector<vector<int>> Matrix2D(n, std::vector<int>(n, 0));
+      vector< vector<int> > Matrix2D(n, std::vector<int>(n, 0));
       printVector(Matrix2D);
       // these two lines can be commented out and the program still reaches segfault
       // int* pM2D = (int*)malloc(n*n*sizeof(int));
